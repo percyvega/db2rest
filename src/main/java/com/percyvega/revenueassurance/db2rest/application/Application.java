@@ -17,7 +17,7 @@ import java.util.Arrays;
 @ComponentScan("com.percyvega.revenueassurance.db2rest")
 @EnableJpaRepositories("com.percyvega.revenueassurance.db2rest.repository")
 @EntityScan("com.percyvega.revenueassurance.db2rest.model")
-@PropertySource({"application.properties", "sensitive.properties"})
+@PropertySource(value = {"application.properties", "sensitive.properties"}, ignoreResourceNotFound = true)
 public class Application {
 
     private static final Logger logger = LoggerFactory.getLogger(Application.class);
