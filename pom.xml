@@ -6,7 +6,7 @@
 
     <groupId>com.percyvega.revenueassurance</groupId>
     <!--<artifactId>ri_db2rest</artifactId>-->
-    <artifactId>db2rest</artifactId>
+    <artifactId>ra_db2rest</artifactId>
     <version>1.0-SNAPSHOT</version>
     <!--<packaging>jar</packaging>-->
 
