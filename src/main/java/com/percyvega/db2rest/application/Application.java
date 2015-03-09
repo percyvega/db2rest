@@ -1,4 +1,4 @@
-package com.percyvega.revenueassurance.db2rest.application;
+package com.percyvega.db2rest.application;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,9 +14,9 @@ import java.util.Arrays;
 
 @Configuration
 @EnableAutoConfiguration
-@ComponentScan("com.percyvega.revenueassurance.db2rest")
-@EnableJpaRepositories("com.percyvega.revenueassurance.db2rest.repository")
-@EntityScan("com.percyvega.revenueassurance.db2rest.model")
+@ComponentScan("com.percyvega.db2rest")
+@EnableJpaRepositories("com.percyvega.db2rest.repository")
+@EntityScan("com.percyvega.db2rest.model")
 @PropertySource(value = {"application.properties", "sensitive.properties"}, ignoreResourceNotFound = true)
 public class Application {
 

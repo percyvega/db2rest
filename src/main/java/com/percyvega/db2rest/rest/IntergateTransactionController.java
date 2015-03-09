@@ -1,6 +1,6 @@
-package com.percyvega.revenueassurance.db2rest.rest;
+package com.percyvega.db2rest.rest;
 
-import com.percyvega.revenueassurance.db2rest.service.Db2RestService;
+import com.percyvega.db2rest.service.Db2RestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

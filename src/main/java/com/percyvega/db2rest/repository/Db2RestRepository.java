@@ -1,6 +1,6 @@
-package com.percyvega.revenueassurance.db2rest.repository;
+package com.percyvega.db2rest.repository;
 
-import com.percyvega.revenueassurance.db2rest.model.IntergateTransaction;
+import com.percyvega.db2rest.model.IntergateTransaction;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;

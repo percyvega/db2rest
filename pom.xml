@@ -4,9 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.percyvega.revenueassurance</groupId>
-    <!--<artifactId>ri_db2rest</artifactId>-->
-    <artifactId>ra_db2rest</artifactId>
+    <groupId>com.percyvega</groupId>
+    <artifactId>db2rest</artifactId>
     <version>1.0-SNAPSHOT</version>
     <!--<packaging>jar</packaging>-->
 
@@ -54,7 +53,7 @@
     </dependencies>
 
     <properties>
-        <start-class>com.percyvega.revenueassurance.db2rest.application.Application</start-class>
+        <start-class>com.percyvega.db2rest.application.Application</start-class>
         <!-- use UTF-8 for everything -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>

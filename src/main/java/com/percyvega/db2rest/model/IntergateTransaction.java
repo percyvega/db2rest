@@ -1,4 +1,4 @@
-package com.percyvega.revenueassurance.db2rest.model;
+package com.percyvega.db2rest.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -48,6 +48,7 @@ public class IntergateTransaction {
         this.tryCount = 0L;
         this.status = Status.QUEUED;
         this.creationDate = new Date(System.currentTimeMillis());
+        setUpdateDate();
     }
 
     public Long getObjid() {
@@ -85,6 +86,7 @@ public class IntergateTransaction {
 
     public void setResponse(String response) {
         this.response = response;
+        setUpdateDate();
     }
 
     public Long getTryCount() {
@@ -93,6 +95,7 @@ public class IntergateTransaction {
 
     public void setTryCount(Long tryCount) {
         this.tryCount = tryCount;
+        setUpdateDate();
     }
 
     public Status getStatus() {
