@@ -1,9 +1,11 @@
 package com.percyvega.db2rest.service;
 
 import com.percyvega.db2rest.model.Carrier;
+import com.percyvega.db2rest.model.IntergateTransaction;
 import com.percyvega.db2rest.model.Status;
 import com.percyvega.db2rest.repository.Db2RestRepository;
-import com.percyvega.db2rest.model.IntergateTransaction;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -14,6 +16,8 @@ import java.util.Collection;
 @Service
 public class Db2RestServiceImpl implements Db2RestService {
 
+    private static final Logger logger = LoggerFactory.getLogger(Db2RestServiceImpl.class);
+
     private Db2RestRepository db2RestRepository;
 
     @Autowired
@@ -23,7 +27,7 @@ public class Db2RestServiceImpl implements Db2RestService {
 
     @Override
     @Transactional
-    public Collection<? extends IntergateTransaction> find(String statusName, String carrierName, int count) throws DataAccessException {
+    public Collection<IntergateTransaction> find(String statusName, String carrierName, int count) throws DataAccessException {
         Status status = Status.getByName(statusName);
         Carrier carrier = Carrier.getByName(carrierName);
 
@@ -34,13 +38,18 @@ public class Db2RestServiceImpl implements Db2RestService {
         if (count < 1 || count > 150)
             throw new RuntimeException(count + " is not a valid count value (1-150)");
 
-        Collection<? extends IntergateTransaction> intergateTransactions = db2RestRepository.find(status.getName(), carrier.getName(), count);
+        Collection<IntergateTransaction> intergateTransactions = db2RestRepository.find(status.getName(), carrier.getName(), count);
+
+        for(IntergateTransaction intergateTransaction : intergateTransactions) {
+            logger.debug(intergateTransaction.toString());
+        }
+
         return intergateTransactions;
     }
 
     @Override
     @Transactional
-    public Collection<? extends IntergateTransaction> findAndUpdate(String oldStatusName, String newStatusName, String carrierName, int count) throws DataAccessException {
+    public Collection<IntergateTransaction> findAndUpdate(String oldStatusName, String newStatusName, String carrierName, int count) throws DataAccessException {
         Status oldStatus = Status.getByName(oldStatusName);
         Status newStatus = Status.getByName(newStatusName);
         Carrier carrier = Carrier.getByName(carrierName);
@@ -54,8 +63,10 @@ public class Db2RestServiceImpl implements Db2RestService {
         if (count < 1 || count > 150)
             throw new RuntimeException(count + " is not a valid count value (1-150)");
 
-        Collection<? extends IntergateTransaction> intergateTransactions = db2RestRepository.find(oldStatus.getName(), carrier.getName(), count);
+        Collection<IntergateTransaction> intergateTransactions = db2RestRepository.find(oldStatus.getName(), carrier.getName(), count);
+
         for(IntergateTransaction intergateTransaction : intergateTransactions) {
+            logger.debug(intergateTransaction.toString());
             intergateTransaction.setStatus(newStatus);
             intergateTransaction.setTryCount(intergateTransaction.getTryCount() + 1);
             save(intergateTransaction);

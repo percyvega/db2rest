@@ -7,9 +7,9 @@ import java.util.Collection;
 
 public interface Db2RestService {
 
-    Collection<? extends IntergateTransaction> find(String statusName, String carrierName, int count) throws DataAccessException;
+    Collection<IntergateTransaction> find(String statusName, String carrierName, int count) throws DataAccessException;
 
-    Collection<? extends IntergateTransaction> findAndUpdate(String oldStatusName, String newStatusName, String carrierName, int count) throws DataAccessException;
+    Collection<IntergateTransaction> findAndUpdate(String oldStatusName, String newStatusName, String carrierName, int count) throws DataAccessException;
 
     void save(IntergateTransaction intergateTransaction) throws DataAccessException;
 

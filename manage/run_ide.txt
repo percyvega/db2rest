@@ -3,4 +3,4 @@
 
 
 
--DDB2REST
+-db2rest
