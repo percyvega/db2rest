@@ -1,6 +1,6 @@
-package com.percyvega.db2rest.service;
+package com.percyvega.service;
 
-import com.percyvega.db2rest.model.IntergateTransaction;
+import com.percyvega.model.IntergateTransaction;
 import org.springframework.dao.DataAccessException;
 
 import java.util.Collection;

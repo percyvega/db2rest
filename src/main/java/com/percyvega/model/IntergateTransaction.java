@@ -1,15 +1,12 @@
-package com.percyvega.db2rest.model;
+package com.percyvega.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.percyvega.util.JacksonUtil;
 
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Date;
 
 @Entity
 @Table(name = "INQ_RESULT", schema = "SA")
-@XmlRootElement(name = "IntergateTransaction")
 public class IntergateTransaction {
 
     @Id
@@ -132,11 +129,6 @@ public class IntergateTransaction {
     public void setUpdateDate(/*Date updateDate*/) {
 //        this.updateDate = updateDate;
         this.updateDate = new Date();
-    }
-
-    @Override
-    public String toString() {
-        return JacksonUtil.toJson(this);
     }
 
 }

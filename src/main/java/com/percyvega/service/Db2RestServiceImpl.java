@@ -1,9 +1,11 @@
-package com.percyvega.db2rest.service;
+package com.percyvega.service;
 
-import com.percyvega.db2rest.model.Carrier;
-import com.percyvega.db2rest.model.IntergateTransaction;
-import com.percyvega.db2rest.model.Status;
-import com.percyvega.db2rest.repository.Db2RestRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.percyvega.model.Carrier;
+import com.percyvega.model.IntergateTransaction;
+import com.percyvega.model.Status;
+import com.percyvega.repository.Db2RestRepository;
+import com.percyvega.util.JacksonUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +43,11 @@ public class Db2RestServiceImpl implements Db2RestService {
         Collection<IntergateTransaction> intergateTransactions = db2RestRepository.find(status.getName(), carrier.getName(), count);
 
         for(IntergateTransaction intergateTransaction : intergateTransactions) {
-            logger.debug(intergateTransaction.toString());
+            try {
+                logger.debug(JacksonUtil.fromTransactionToJson(intergateTransaction));
+            } catch (JsonProcessingException e) {
+                e.printStackTrace();
+            }
         }
 
         return intergateTransactions;
@@ -66,7 +72,11 @@ public class Db2RestServiceImpl implements Db2RestService {
         Collection<IntergateTransaction> intergateTransactions = db2RestRepository.find(oldStatus.getName(), carrier.getName(), count);
 
         for(IntergateTransaction intergateTransaction : intergateTransactions) {
-            logger.debug(intergateTransaction.toString());
+            try {
+                logger.debug(JacksonUtil.fromTransactionToJson(intergateTransaction));
+            } catch (JsonProcessingException e) {
+                e.printStackTrace();
+            }
             intergateTransaction.setStatus(newStatus);
             intergateTransaction.setTryCount(intergateTransaction.getTryCount() + 1);
             save(intergateTransaction);
