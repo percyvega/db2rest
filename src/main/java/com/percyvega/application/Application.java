@@ -24,6 +24,7 @@ public class Application {
 
     public static void main(String[] args) {
         logger.debug("Starting main(" + Arrays.toString(args) + ")");
+
         SpringApplication.run(Application.class, args);
     }
 

@@ -44,7 +44,7 @@ public class Db2RestServiceImpl implements Db2RestService {
 
         for(IntergateTransaction intergateTransaction : intergateTransactions) {
             try {
-                logger.debug(JacksonUtil.fromTransactionToJson(intergateTransaction));
+                logger.debug("Processing: " + JacksonUtil.fromTransactionToJson(intergateTransaction));
             } catch (JsonProcessingException e) {
                 e.printStackTrace();
             }
@@ -73,7 +73,7 @@ public class Db2RestServiceImpl implements Db2RestService {
 
         for(IntergateTransaction intergateTransaction : intergateTransactions) {
             try {
-                logger.debug(JacksonUtil.fromTransactionToJson(intergateTransaction));
+                logger.debug("Processing: " + JacksonUtil.fromTransactionToJson(intergateTransaction));
             } catch (JsonProcessingException e) {
                 e.printStackTrace();
             }
