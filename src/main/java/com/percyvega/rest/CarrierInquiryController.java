@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Collection;
 
 @RestController
-@RequestMapping("intergateTransaction")
-public class IntergateTransactionController {
+@RequestMapping("actions")
+public class CarrierInquiryController {
 
     @Autowired
     private Db2RestService db2RestService;

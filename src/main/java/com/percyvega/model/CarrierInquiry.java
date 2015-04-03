@@ -7,7 +7,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "INQ_RESULT", schema = "SA")
-public class IntergateTransaction {
+public class CarrierInquiry {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -37,10 +37,10 @@ public class IntergateTransaction {
 
     private String response;
 
-    public IntergateTransaction() {
+    public CarrierInquiry() {
     }
 
-    public IntergateTransaction(String mdn, Carrier carrier) {
+    public CarrierInquiry(String mdn, Carrier carrier) {
         this.mdn = mdn;
         this.orderType = "I";
         this.tryCount = 0L;

@@ -2,7 +2,7 @@ package com.percyvega.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.percyvega.model.Carrier;
-import com.percyvega.model.IntergateTransaction;
+import com.percyvega.model.CarrierInquiry;
 import com.percyvega.model.Status;
 import com.percyvega.repository.Db2RestRepository;
 import com.percyvega.util.JacksonUtil;
@@ -29,7 +29,7 @@ public class Db2RestServiceImpl implements Db2RestService {
 
     @Override
     @Transactional
-    public Collection<IntergateTransaction> find(String statusName, String carrierName, int count) throws DataAccessException {
+    public Collection<CarrierInquiry> find(String statusName, String carrierName, int count) throws DataAccessException {
         Status status = Status.getByName(statusName);
         Carrier carrier = Carrier.getByName(carrierName);
 
@@ -40,22 +40,22 @@ public class Db2RestServiceImpl implements Db2RestService {
         if (count < 1 || count > 150)
             throw new RuntimeException(count + " is not a valid count value (1-150)");
 
-        Collection<IntergateTransaction> intergateTransactions = db2RestRepository.find(status.getName(), carrier.getName(), count);
+        Collection<CarrierInquiry> carrierInquiries = db2RestRepository.find(status.getName(), carrier.getName(), count);
 
-        for(IntergateTransaction intergateTransaction : intergateTransactions) {
+        for(CarrierInquiry carrierInquiry : carrierInquiries) {
             try {
-                logger.debug("Processing: " + JacksonUtil.fromTransactionToJson(intergateTransaction));
+                logger.debug("Processing: " + JacksonUtil.toJson(carrierInquiry));
             } catch (JsonProcessingException e) {
                 e.printStackTrace();
             }
         }
 
-        return intergateTransactions;
+        return carrierInquiries;
     }
 
     @Override
     @Transactional
-    public Collection<IntergateTransaction> findAndUpdate(String oldStatusName, String newStatusName, String carrierName, int count) throws DataAccessException {
+    public Collection<CarrierInquiry> findAndUpdate(String oldStatusName, String newStatusName, String carrierName, int count) throws DataAccessException {
         Status oldStatus = Status.getByName(oldStatusName);
         Status newStatus = Status.getByName(newStatusName);
         Carrier carrier = Carrier.getByName(carrierName);
@@ -69,24 +69,24 @@ public class Db2RestServiceImpl implements Db2RestService {
         if (count < 1 || count > 150)
             throw new RuntimeException(count + " is not a valid count value (1-150)");
 
-        Collection<IntergateTransaction> intergateTransactions = db2RestRepository.find(oldStatus.getName(), carrier.getName(), count);
+        Collection<CarrierInquiry> carrierInquiries = db2RestRepository.find(oldStatus.getName(), carrier.getName(), count);
 
-        for(IntergateTransaction intergateTransaction : intergateTransactions) {
+        for(CarrierInquiry carrierInquiry : carrierInquiries) {
             try {
-                logger.debug("Processing: " + JacksonUtil.fromTransactionToJson(intergateTransaction));
+                logger.debug("Processing: " + JacksonUtil.toJson(carrierInquiry));
             } catch (JsonProcessingException e) {
                 e.printStackTrace();
             }
-            intergateTransaction.setStatus(newStatus);
-            intergateTransaction.setTryCount(intergateTransaction.getTryCount() + 1);
-            save(intergateTransaction);
+            carrierInquiry.setStatus(newStatus);
+            carrierInquiry.setTryCount(carrierInquiry.getTryCount() + 1);
+            save(carrierInquiry);
         }
-        return intergateTransactions;
+        return carrierInquiries;
     }
 
     @Override
-    public void save(IntergateTransaction intergateTransaction) throws DataAccessException {
-        db2RestRepository.save(intergateTransaction);
+    public void save(CarrierInquiry carrierInquiry) throws DataAccessException {
+        db2RestRepository.save(carrierInquiry);
     }
 
 }
