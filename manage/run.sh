@@ -1,7 +1,17 @@
 #!/bin/bash
 
+. setVars.sh
+if [ -z "$APP_NAME" ]
+then
+    echo "$APP_NAME cannot be empty."
+    exit
+fi
+
 cd ..
 
 nohup /opt/bea/bea1033/jdk1.6.0_20/bin/java \
--Ddb2rest \
--jar target/db2rest-1.0-SNAPSHOT.jar &
+-D$APP_NAME \
+-jar target/$APP_NAME-1.0-SNAPSHOT.jar \
+    $spring_datasource_url \
+    $spring_datasource_username \
+    $spring_datasource_password &

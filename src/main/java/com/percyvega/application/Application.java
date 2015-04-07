@@ -17,7 +17,7 @@ import java.util.Arrays;
 @ComponentScan("com.percyvega")
 @EnableJpaRepositories("com.percyvega.repository")
 @EntityScan("com.percyvega.model")
-@PropertySource(value = {"application.properties", "sensitive.properties"}, ignoreResourceNotFound = true)
+@PropertySource("application.properties")
 public class Application {
 
     private static final Logger logger = LoggerFactory.getLogger(Application.class);
